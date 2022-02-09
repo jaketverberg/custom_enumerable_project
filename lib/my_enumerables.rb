@@ -8,4 +8,10 @@ end
 # to this method
 class Array
   # Define my_each here
+  def my_each
+
+    for k, v in self do
+      yield k, v
+    end
+  end
 end
