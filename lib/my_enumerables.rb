@@ -40,6 +40,25 @@ module Enumerable
     end
     accumulator
   end
+
+  def my_map(&block)
+    new_map = []
+    return to_enum unless block_given?
+
+    self.my_each { |i| new_map.push(block.call(i)) }
+    new_map
+  end
+
+  def my_none?(&block)
+    self.my_each { |i| return false if block.call(i) }
+    true
+  end
+
+  def my_select(&block)
+    selection = []
+    self.my_each { |i| selection.push(i) if block.call(i) }
+    selection
+  end
 end
 
 # You will first have to define my_each
@@ -49,6 +68,8 @@ end
 class Array
   # Define my_each here
   def my_each
+    return to_enum unless block_given?
+
     for k, v in self do
       yield k, v
     end
@@ -57,4 +78,4 @@ end
 
 arr = [1, 1, 2, 3, 5, 8, 13, 21, 34]
 
-arr.my_each_with_index
+arr.my_map
