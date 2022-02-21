@@ -61,12 +61,8 @@ module Enumerable
   end
 end
 
-# You will first have to define my_each
-# on the Array class. Methods defined in
-# your enumerable module will have access
-# to this method
+
 class Array
-  # Define my_each here
   def my_each
     return to_enum unless block_given?
 
@@ -75,7 +71,3 @@ class Array
     end
   end
 end
-
-arr = [1, 1, 2, 3, 5, 8, 13, 21, 34]
-
-arr.my_map
